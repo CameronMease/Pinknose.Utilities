@@ -28,7 +28,7 @@ namespace Pinknose.Utilities
 
             if (startCount > maxCount || startCount < 0)
             {
-                throw new ArgumentException($"{nameof(maxCount)} is less than zero or {nameof(startCount)} is more than {nameof(maxCount)}.");
+                throw new ArgumentException($"{nameof(startCount)} is less than zero or {nameof(startCount)} is more than {nameof(maxCount)}.");
             }
 
             count = startCount;
