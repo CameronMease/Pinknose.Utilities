@@ -6,9 +6,10 @@ namespace Pinknose.Utilities
 {
     public static class TypeExtensions
     {
+#if !NETCOREAPP
         /// <summary>
         /// Checks if the object can be assigned to another type.  True means this object is one of the following:
-        /// Is the same type as the tested type; is a subclass of the tested type; implements the tested type (if the 
+        /// Is the same type as the tested type; is a subclass of the tested type; implements the tested type (if the
         /// tested type is an interface).
         /// </summary>
         /// <param name="thisObject"></param>
@@ -29,6 +30,7 @@ namespace Pinknose.Utilities
                 targetType.IsAssignableFrom(thisObject) ||
                 targetType.IsInterface && thisObject.GetInterface(targetType.Name) != null;
         }
+#endif
 
         /// <summary>
         /// Checks if a type is a nullable Enum.
