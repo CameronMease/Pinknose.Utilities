@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Pinknose.Utilities
 {
     public static class TypeExtensions
     {
 #if !NETCOREAPP
+
         /// <summary>
         /// Checks if the object can be assigned to another type.  True means this object is one of the following:
         /// Is the same type as the tested type; is a subclass of the tested type; implements the tested type (if the
@@ -30,6 +29,7 @@ namespace Pinknose.Utilities
                 targetType.IsAssignableFrom(thisObject) ||
                 targetType.IsInterface && thisObject.GetInterface(targetType.Name) != null;
         }
+
 #endif
 
         /// <summary>
