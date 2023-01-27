@@ -4,7 +4,7 @@ namespace Pinknose.Utilities
 {
     public static class TypeExtensions
     {
-#if !NETCOREAPP
+#if !NET5_0_OR_GREATER
 
         /// <summary>
         /// Checks if the object can be assigned to another type.  True means this object is one of the following:

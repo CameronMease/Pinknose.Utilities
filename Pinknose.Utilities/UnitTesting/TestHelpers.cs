@@ -62,9 +62,9 @@ namespace Pinknose.Utilities.UnitTesting
         public static void AssertExceptionCaught<T>(Action test) where T : Exception
             => AssertExceptionCaught(typeof(T), test);
 
-        public static void AssertExceptionCaught(Type expectedException, Action test)
+        public static void AssertExceptionCaught(Type expectedExceptionType, Action test)
         {
-            Assert.IsTrue(expectedException.IsAssignableTo(typeof(Exception)));
+            Assert.IsTrue(expectedExceptionType.IsAssignableTo(typeof(Exception)));
 
             bool exceptionCaught = false;
 
@@ -74,7 +74,7 @@ namespace Pinknose.Utilities.UnitTesting
             }
             catch (Exception ex)
             {
-                if (ex.GetType() == expectedException)
+                if (ex.GetType() == expectedExceptionType)
                 {
                     exceptionCaught = true;
                 }
