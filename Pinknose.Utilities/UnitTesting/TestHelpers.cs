@@ -46,6 +46,13 @@ namespace Pinknose.Utilities.UnitTesting
             var diff = Math.Abs((dynamic)value1 - (dynamic)value2);
             Assert.IsTrue(diff <= acceptableDifference);
         }
+#else
+
+        public static void AssertApproximatelyEqual<T>(this T value1, T value2, T acceptableDifference) where T : struct, IComparable<T>
+        {
+            
+            throw new NotImplementedException();
+        }
 
 #endif
 
