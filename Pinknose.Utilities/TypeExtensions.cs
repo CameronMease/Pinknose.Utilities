@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace Pinknose.Utilities
 {
@@ -27,7 +28,7 @@ namespace Pinknose.Utilities
 
             return thisObject == targetType ||
                 targetType.IsAssignableFrom(thisObject) ||
-                targetType.IsInterface && thisObject.GetInterface(targetType.Name) != null;
+                targetType.IsInterface && thisObject.GetInterfaces().Any(i => i == targetType);
         }
 
 #endif

@@ -48,10 +48,16 @@ namespace Pinknose.Utilities.UnitTesting
         }
 #else
 
-        public static void AssertApproximatelyEqual<T>(this T value1, T value2, T acceptableDifference) where T : struct, IComparable<T>
+        public static void AssertApproximatelyEqual(this decimal value1, decimal value2, decimal acceptableDifference) 
         {
-            
-            throw new NotImplementedException();
+            var diff = Math.Abs(value1 - value2);
+            Assert.IsTrue(diff <= acceptableDifference);
+        }
+
+        public static void AssertApproximatelyEqual(this float value1, float value2, float acceptableDifference) 
+        {
+            var diff = Math.Abs(value1 - value2);
+            Assert.IsTrue(diff <= acceptableDifference);
         }
 
 #endif
