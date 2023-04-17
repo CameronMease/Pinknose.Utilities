@@ -96,6 +96,27 @@ namespace Pinknose.Utilities.UnitTesting
             Assert.IsTrue(exceptionCaught);
         }
 
+        public static void AssertEventCaught<T>(T testObject, string eventName, Action test)
+        {
+            var eventInfo = typeof(T).GetEvent(eventName);
+
+            Assert.IsNotNull(eventInfo);
+
+            bool eventCaught = false;
+
+            var handler = new EventHandler(delegate (object sender, EventArgs e) { eventCaught = true; });
+
+            eventInfo.AddEventHandler(testObject, handler);
+
+            Assert.IsFalse(eventCaught);
+
+            test.Invoke();
+
+            eventInfo.RemoveEventHandler(testObject, handler);
+
+            Assert.IsTrue(eventCaught);
+        }
+
         #endregion Methods
     }
 }
