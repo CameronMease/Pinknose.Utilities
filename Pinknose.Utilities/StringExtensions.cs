@@ -17,7 +17,7 @@ namespace Pinknose.Utilities
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         public static string FormatToMaxWidth(this string str, int maxWidth) => FormatToMaxWidth(str, maxWidth, Environment.NewLine);
 
-        public static string FormatToMaxWidthForHtml(this string str, int maxWidth) => FormatToMaxWidth(str, maxWidth, "<BR/>");
+        public static string FormatToMaxWidthForHtml(this string str, int maxWidth) => FormatToMaxWidth(str, maxWidth, "<br/>");
 
         private static string FormatToMaxWidth(this string str, int maxWidth, string lineTerminator)
         {
