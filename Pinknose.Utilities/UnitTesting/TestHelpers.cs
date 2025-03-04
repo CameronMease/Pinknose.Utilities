@@ -49,7 +49,7 @@ namespace Pinknose.Utilities.UnitTesting
 #if NETCOREAPP
 #else
 
-        public static void AssertApproximatelyEqual(this decimal value1, decimal value2, decimal acceptableDifference)
+        public static void AssertApproximatelyEqual(this double value1, double value2, double acceptableDifference)
         {
             var diff = Math.Abs(value1 - value2);
             Assert.IsTrue(diff <= acceptableDifference);
@@ -64,11 +64,6 @@ namespace Pinknose.Utilities.UnitTesting
 #endif
 
         public static void AssertEqualWhenRounded(double expectedValue, double actualValue, int digits)
-        {
-            Assert.AreEqual(expectedValue, Math.Round(actualValue, digits));
-        }
-
-        public static void AssertEqualWhenRounded(decimal expectedValue, decimal actualValue, int digits)
         {
             Assert.AreEqual(expectedValue, Math.Round(actualValue, digits));
         }
