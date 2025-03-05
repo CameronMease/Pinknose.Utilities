@@ -15,10 +15,10 @@ namespace Pinknose.Utilities.CodeComments
     /// <summary>
     /// Class that enables programmatic retrieval of XML comments for properties, methods, etc.
     /// </summary>
-    public static class CommentExtensions
+    public static partial class CommentExtensions
     {
-        private static readonly Dictionary<string, string> comments = new();
-        private static readonly Dictionary<string, XmlDocument> assemblyXml = new();
+        private static readonly Dictionary<string, string> comments = [];
+        private static readonly Dictionary<string, XmlDocument> assemblyXml = [];
 
         /// <summary>
         /// Gets the XML code comment from the object's property with the name supplied in propertyName.
@@ -72,9 +72,8 @@ namespace Pinknose.Utilities.CodeComments
                 {
                     if (!comments.TryGetValue(key, out comment))
                     {
-                        XmlDocument xml;
 
-                        if (!assemblyXml.TryGetValue(assemblyQualifiedName, out xml))
+                        if (!assemblyXml.TryGetValue(assemblyQualifiedName, out XmlDocument xml))
                         {
                             var xmlFilePath = Path.ChangeExtension(codeBase, "xml");
                             xml = new XmlDocument();
@@ -105,9 +104,20 @@ namespace Pinknose.Utilities.CodeComments
             }
         }
 
-        private static readonly Regex DuplicateWhitespaceRegex = new Regex(@"\s{2,}", RegexOptions.Compiled);
+
+        
 
         private static string FormatComment(string comment) => DuplicateWhitespaceRegex.Replace(comment, " ").Trim();
+
+        
+
+#if NET7_0_OR_GREATER
+        [GeneratedRegex("\\s{2,}", RegexOptions.Compiled)]
+        private static partial Regex CompiledDuplicateWhitespaceRegex();
+        private static readonly Regex DuplicateWhitespaceRegex = CompiledDuplicateWhitespaceRegex();
+#else
+        private static readonly Regex DuplicateWhitespaceRegex = new("\\s{2,}", RegexOptions.Compiled);
+#endif
 
     }
 }
